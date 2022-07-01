@@ -3,24 +3,26 @@ import axios from 'axios'
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
 
+// localhost
+// http://localhost:8000/api/brands
 const App = () => {
   const [brands, setBrands] = useState([])
 
   const getBrands = () => {
-    axios.get('http://localhost:8000/api/brands')
+    axios.get('https://capstone-warehouse-inventory.herokuapp.com/api/brands')
     .then(response => setBrands(response.data),
     (err)=> console.log(err)
   )
     .catch((error) => console.error(error))
   }
   const handleCreate = (addBrand) => {
-    axios.post('http://localhost:8000/api/brands', addBrand)
+    axios.post('https://capstone-warehouse-inventory.herokuapp.com/api/brands', addBrand)
     .then((response) => {
       setBrands([...brands, addBrand])
     })
   }
   const handleUpdate = (editBrand) => {
-    axios.put('http://localhost:8000/api/brands/' + editBrand.id, editBrand)
+    axios.put('https://capstone-warehouse-inventory.herokuapp.com/api/brands' + editBrand.id, editBrand)
     .then((response) => {
       setBrands(brands.map((brand) => {
         return brand.id !== response.data.id ? brand :
@@ -29,7 +31,7 @@ const App = () => {
     })
   }
   const handleDelete = (event, deletedBrand) => {
-    axios.delete('http://localhost:8000/api/brands/' + event.target.value)
+    axios.delete('https://capstone-warehouse-inventory.herokuapp.com/api/brands' + event.target.value)
     .then((response) => {
       setBrands(brands.filter(brand => brand.id !== deletedBrand.id))
     })
