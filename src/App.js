@@ -22,7 +22,8 @@ const App = () => {
     })
   }
   const handleUpdate = (editBrand) => {
-    axios.put('https://capstone-warehouse-inventory.herokuapp.com/api/brands' + editBrand.id, editBrand)
+    console.log(editBrand)
+    axios.put('https://capstone-warehouse-inventory.herokuapp.com/api/brands/' + editBrand.id, editBrand)
     .then((response) => {
       setBrands(brands.map((brand) => {
         return brand.id !== response.data.id ? brand :
@@ -31,7 +32,7 @@ const App = () => {
     })
   }
   const handleDelete = (event, deletedBrand) => {
-    axios.delete('https://capstone-warehouse-inventory.herokuapp.com/api/brands' + event.target.value)
+    axios.delete('https://capstone-warehouse-inventory.herokuapp.com/api/brands/' + event.target.value)
     .then((response) => {
       setBrands(brands.filter(brand => brand.id !== deletedBrand.id))
     })
