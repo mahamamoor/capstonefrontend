@@ -7,6 +7,8 @@ import Edit from './components/Edit.js'
 // http://localhost:8000/api/brands
 const App = () => {
   const [brands, setBrands] = useState([])
+  const [search, setSearch] = useState("")
+  const [noSearch, setNoSearch] = useState("No item on this list matches the product")
 
   const getBrands = () => {
     axios.get('https://capstone-warehouse-inventory.herokuapp.com/api/brands')
@@ -46,9 +48,13 @@ const App = () => {
       <div className='brands'>
       <h1 className="text-3xl font-bold underline hover:bg-black hover:text-white">Inventory App</h1>
       <h2 className="text-2xl font-bold hover:bg-black hover:text-white">Raw Materials</h2>
-      <table className="table-auto">
+      <div className="searchbar">
+        <p className="productSearch">Search for your product by Supplier</p>
+        <input className="input-search" type="text" placeholder="Search..." onChange={event => {setSearch(event.target.value)}}/>
+      </div>
+      <table className="table-fixed">
         <thead>
-          <tr>
+          <tr className="odd:bg-white even:bg-slate-50">
             <th>Name</th>
             <th>Product</th>
             <th>Warehouse</th>
@@ -58,11 +64,18 @@ const App = () => {
             <th>Delete Inventory</th>
           </tr>
         </thead>
-      {brands.map((brand) => {
+        <div className="products-list">
+        {brands.filter(brand => {
+          if (search == "") {
+            return brand
+          } else if (brand.name.toLowerCase().includes(search.toLowerCase())) {
+            return brand
+          }
+        }).map((brand) => {
         return(
           <>
             <tbody>
-              <tr className="odd:bg-white even:bg-slate-50" key={brand.id}>
+              <tr className="odd:bg-white even:bg-slate-50"  key={brand.id}>
                 <td>{brand.name}</td>
                 <td>{brand.product}</td>
                 <td>{brand.warehouse}</td>
@@ -77,6 +90,7 @@ const App = () => {
           </>
         )
       })}
+      </div>
       </table>
       <h5 className="text-2xl font-bold">Add Product to Inventory</h5>
         <Add handleCreate={handleCreate}/>
