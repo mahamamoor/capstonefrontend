@@ -43,26 +43,43 @@ const App = () => {
 
   return (
     <div className="bg-sky-700">
-      <Add handleCreate={handleCreate}/>
       <div className='brands'>
       <h1 className="text-3xl font-bold underline hover:bg-black hover:text-white">Inventory App</h1>
+      <h2 className="text-2xl font-bold hover:bg-black hover:text-white">Raw Materials</h2>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Product</th>
+            <th>Warehouse</th>
+            <th>Status</th>
+            <th>Quantity</th>
+            <th>Edit Product</th>
+            <th>Delete Inventory</th>
+          </tr>
+        </thead>
       {brands.map((brand) => {
         return(
-          <div className="md:flex text-center sm:text-left hover:bg-sky-600" key={brand.id}>
-          <ul role="list" class="p-6 divide-y divide-slate-200">
-            <h5>Name: {brand.name}</h5>
-            <h5>Product: {brand.product}</h5>
-            <h5>Warehouse: {brand.warehouse}</h5>
-            <h5>Status: {brand.status}</h5>
-            <h5>Quantity: {brand.quantity}</h5>
-            <Edit handleUpdate={handleUpdate} brand={brand}/>
-            <button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
-            X
-            </button>
-          </ul>
-          </div>
+          <>
+            <tbody>
+              <tr className="odd:bg-white even:bg-slate-50" key={brand.id}>
+                <td>{brand.name}</td>
+                <td>{brand.product}</td>
+                <td>{brand.warehouse}</td>
+                <td>{brand.status}</td>
+                <td>{brand.quantity}</td>
+                <td><Edit handleUpdate={handleUpdate} brand={brand}/></td>
+                <td><button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
+                X
+                </button></td>
+              </tr>
+            </tbody>
+          </>
         )
       })}
+      </table>
+      <h5 className="text-2xl font-bold">Add Product to Inventory</h5>
+        <Add handleCreate={handleCreate}/>
       </div>
     </div>
   )
