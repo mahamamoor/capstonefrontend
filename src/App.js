@@ -42,13 +42,14 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <div className="bg-sky-700">
       <Add handleCreate={handleCreate}/>
       <div className='brands'>
-      <h1>Inventory App</h1>
+      <h1 className="text-3xl font-bold underline hover:bg-black hover:text-white">Inventory App</h1>
       {brands.map((brand) => {
         return(
-          <div className='brand' key={brand.id}>
+          <div className="md:flex text-center sm:text-left hover:bg-sky-600" key={brand.id}>
+          <ul role="list" class="p-6 divide-y divide-slate-200">
             <h5>Name: {brand.name}</h5>
             <h5>Product: {brand.product}</h5>
             <h5>Warehouse: {brand.warehouse}</h5>
@@ -58,11 +59,12 @@ const App = () => {
             <button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
             X
             </button>
+          </ul>
           </div>
         )
       })}
       </div>
-    </>
+    </div>
   )
 }
 
