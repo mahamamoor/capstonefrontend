@@ -89,8 +89,7 @@ const App = () => {
                 <td className="odd">{brand.name}</td>
                 <td>{brand.product}</td>
                 <td>{brand.warehouse}</td>
-                <td className="">{brand.status}</td>
-                {status === 'available' ? style="background-color:{userThemeColor}" : ""}
+                <td className={(brand.status === 'available') ? 'bg-green-500' : 'bg-red-600'}>{brand.status}</td>
                 <td>{brand.quantity}</td>
                 <td><Edit handleUpdate={handleUpdate} brand={brand}/></td>
                 <td><button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
