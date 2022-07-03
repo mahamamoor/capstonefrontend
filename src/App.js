@@ -9,6 +9,7 @@ const App = () => {
   const [brands, setBrands] = useState([])
   const [search, setSearch] = useState("")
   const [noSearch, setNoSearch] = useState("No item on this list matches the product")
+  const [status, setStatus] = useState(false)
 
   const getBrands = () => {
     axios.get('https://capstone-warehouse-inventory.herokuapp.com/api/brands')
@@ -39,6 +40,7 @@ const App = () => {
       setBrands(brands.filter(brand => brand.id !== deletedBrand.id))
     })
 }
+
   useEffect(() => {
     getBrands()
   }, [])
@@ -87,7 +89,8 @@ const App = () => {
                 <td className="odd">{brand.name}</td>
                 <td>{brand.product}</td>
                 <td>{brand.warehouse}</td>
-                <td>{brand.status}</td>
+                <td className="">{brand.status}</td>
+                {status === 'available' ? style="background-color:{userThemeColor}" : ""}
                 <td>{brand.quantity}</td>
                 <td><Edit handleUpdate={handleUpdate} brand={brand}/></td>
                 <td><button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
@@ -99,8 +102,7 @@ const App = () => {
         )
       })}
       </table>
-      <h5 className="text-2xl font-bold">Add Product</h5>
-        <Add handleCreate={handleCreate}/>
+      <Add handleCreate={handleCreate}/>
     </div>
   )
 }

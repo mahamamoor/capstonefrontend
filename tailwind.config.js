@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    colors: {
+      'userThemeColor': 'green',
+    },
     fontFamily: {
       serif: ['Merriweather', 'serif'],
     },
