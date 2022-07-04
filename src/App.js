@@ -9,7 +9,6 @@ const App = () => {
   const [brands, setBrands] = useState([])
   const [search, setSearch] = useState("")
   const [noSearch, setNoSearch] = useState("No item on this list matches the product")
-  const [status, setStatus] = useState(false)
 
   const getBrands = () => {
     axios.get('https://capstone-warehouse-inventory.herokuapp.com/api/brands')
@@ -55,7 +54,7 @@ const App = () => {
           <details className="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg" open>
           <summary className="text-sm text-center leading-6 text-slate-900 dark:text-white font-semibold select-none">About this App</summary>
           <div className="mt-3 text-sm text-center leading-6 text-slate-600 dark:text-slate-400">
-            <p>The purpose of this app is to track your inventory in all of your warehouses.</p>
+            <p>The purpose of this app is to track your inventory in your warehouses.</p>
           </div>
           </details>
         </div>
@@ -63,6 +62,7 @@ const App = () => {
         <p className="productSearch pb-2">Search for your product by Supplier</p>
         <input className="input-search" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
       </div>
+      <div className="p-8">
       <table className="w-full">
         <thead>
           <tr className="bg-gray-50 border-b-2 border-gray-200">
@@ -101,7 +101,10 @@ const App = () => {
         )
       })}
       </table>
-      <Add handleCreate={handleCreate}/>
+      </div>
+      <div className="Add-form">
+        <Add handleCreate={handleCreate}/>
+      </div>
     </div>
   )
 }
