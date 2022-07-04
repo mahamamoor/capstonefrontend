@@ -47,8 +47,8 @@ const App = () => {
   return (
     <div className="">
       <div className="header">
-        <h1 className="text-3xl text-center font-bold hover:bg-black hover:text-white">Inventory Tracker</h1>
-        <h2 className="text-2xl text-center font-bold hover:bg-black hover:text-white">Raw Materials</h2>
+        <h1 className="text-3xl text-center font-bold hover:bg-black hover:text-white pt-4">Inventory Management System</h1>
+        <h2 className="text-2xl text-center font-bold hover:bg-black hover:text-white"></h2>
       </div>
         <div className="max-w-lg mx-auto p-8">
           <details className="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg" open>
@@ -60,7 +60,7 @@ const App = () => {
         </div>
       <div className="text-center pb-16">
         <p className="productSearch pb-2">Search for your product by Supplier</p>
-        <input className="input-search" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
+        <input className="italic" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
       </div>
       <div className="p-8">
       <table className="w-full">
@@ -80,6 +80,8 @@ const App = () => {
             return brand
           } else if (brand.name.toLowerCase().includes(search.toLowerCase())) {
             return brand
+          } else if (search == null) {
+            return setNoSearch;
           }
         }).map((brand) => {
         return(
@@ -89,8 +91,8 @@ const App = () => {
                 <td className="odd">{brand.name}</td>
                 <td>{brand.product}</td>
                 <td>{brand.warehouse}</td>
-                <td className={(brand.status === 'available') ? 'bg-green-500' : 'bg-red-600'}>{brand.status}</td>
-                <td>{brand.quantity}</td>
+                <td className={(brand.status === 'available') ? 'bg-green-500 opacity-75' : 'bg-red-600 opacity-75'}>{brand.status}</td>
+                <td className="lining-nums">{brand.quantity}</td>
                 <td><Edit handleUpdate={handleUpdate} brand={brand}/></td>
                 <td><button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
                 X
@@ -102,7 +104,8 @@ const App = () => {
       })}
       </table>
       </div>
-      <div className="Add-form">
+      <div className="content-center w-96 p-8 border-solid border-2 border-black text-sm">
+        <h5 className="pb-8 font-semibold">Add Product:</h5>
         <Add handleCreate={handleCreate}/>
       </div>
     </div>
