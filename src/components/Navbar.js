@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react'
+import Add from './Add.js'
+import Edit from './Edit.js'
+import Order from './Orders.js'
+import Report from './Reports.js'
+import Services from './Services.js'
 
 const Navbar = () => {
   return(
@@ -16,18 +21,15 @@ const Navbar = () => {
     </div>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
-        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-slate-50 hover:text-white mr-4">
-          Docs
+        <a href={Order} class="block mt-4 lg:inline-block lg:mt-0 text-slate-50 hover:text-white mr-4">
+          Orders
         </a>
         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-slate-50 hover:text-white mr-4">
-          Examples
+          Reports
         </a>
         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-slate-50 hover:text-white">
-          Blog
+          Services
         </a>
-      </div>
-      <div>
-        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
       </div>
     </div>
   </nav>

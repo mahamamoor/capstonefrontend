@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const Order = (props) => {
+const Services = (props) => {
 
   return(
     <>
@@ -9,4 +9,4 @@ const Order = (props) => {
   )
 }
 
-export default Order
+export default Services
