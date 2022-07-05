@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Navbar from './components/Navbar.js'
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
 
@@ -46,9 +47,10 @@ const App = () => {
 
   return (
     <div className="">
-      <div className="header">
-        <h1 className="text-3xl text-center font-bold hover:bg-black hover:text-white pt-4">Inventory Management System</h1>
-        <h2 className="text-2xl text-center font-bold hover:bg-black hover:text-white"></h2>
+      <Navbar/>
+      <div className="max-w-lg mx-auto p-8">
+        <h1 className="text-3xl text-center font-bold hover:bg-green-900 hover:bg-opacity-75 hover:text-white pt-4">Inventory Management System</h1>
+        <h2 className="text-2xl text-center font-bold hover:bg-green-900 opacity-50 hover:text-white"></h2>
       </div>
         <div className="max-w-lg mx-auto p-8">
           <details className="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg" open>
@@ -63,7 +65,7 @@ const App = () => {
         <input className="italic" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
       </div>
       <div className="p-8">
-      <table className="w-full">
+      <table className="w-full hidden md:block">
         <thead>
           <tr className="bg-gray-50 border-b-2 border-gray-200">
             <th className="p-3 text-sm font-semibold tracking-wide text-left">Supplier</th>
@@ -91,7 +93,7 @@ const App = () => {
                 <td className="odd">{brand.name}</td>
                 <td>{brand.product}</td>
                 <td>{brand.warehouse}</td>
-                <td className={(brand.status === 'available') ? 'bg-green-500 opacity-75' : 'bg-red-600 opacity-75'}>{brand.status}</td>
+                <td className={(brand.status === 'available') ? 'bg-green-500 opacity-75 overflow-auto rounded-lg shadow' : 'bg-red-600 opacity-75 overflow-auto rounded-lg shadow'}>{brand.status}</td>
                 <td className="lining-nums">{brand.quantity}</td>
                 <td><Edit handleUpdate={handleUpdate} brand={brand}/></td>
                 <td><button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
@@ -99,17 +101,48 @@ const App = () => {
                 </button></td>
               </tr>
             </tbody>
-          </>
-        )
-      })}
+
       </table>
       </div>
-      <div className="content-center w-96 p-8 border-solid border-2 border-black text-sm">
+      </>
+      return(
+        <>
+        {brands.map((brand) => (
+          return(
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+              <div className="bg-white space-y-3 p-4 rounded-lg shadow">
+                <div className="flex items-center space-x-2 text-sm">
+                  <div>{brand.name}</div>
+                  <div>{brand.product}</div>
+                  <div>{brand.warehouse}</div>
+                  <div className={(brand.status === 'available') ? 'bg-green-500 opacity-75 overflow-auto rounded-lg shadow' : 'bg-red-600 opacity-75 overflow-auto rounded-lg shadow'}>{brand.status}</div>
+                  <div className="text-sm font-medium text-black">{brand.quantity}</div>
+                </div>
+              </div>
+            </div>
+          )
+        ))}
+      </>
+      )
+    </div>
+    <div className="content-center w-96 p-8 border-solid border-2 border-black text-sm">
         <h5 className="pb-8 font-semibold">Add Product:</h5>
         <Add handleCreate={handleCreate}/>
-      </div>
     </div>
   )
 }
-
+)
+})}
 export default App
+
+// <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+//   <div class="bg-white space-y-3 p-4 rounded-lg shadow">
+//     <div class="flex items-center space-x-2 text-sm">
+//       <div>{brand.name}</div>
+//       <div>{brand.product}</div>
+//       <div>{brand.warehouse}</div>
+//       <div className={(brand.status === 'available') ? 'bg-green-500 opacity-75 overflow-auto rounded-lg shadow' : 'bg-red-600 opacity-75 overflow-auto rounded-lg shadow'}>{brand.status}</div>
+//       <div className="text-sm font-medium text-black">{brand.quantity}</div>
+//     </div>
+//   </div>
+// </div>
