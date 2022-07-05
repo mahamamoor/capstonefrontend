@@ -46,6 +46,7 @@ const App = () => {
   }, [])
 
   return (
+    <>
     <div className="">
       <Navbar/>
       <div className="max-w-lg mx-auto p-8">
@@ -101,13 +102,10 @@ const App = () => {
                 </button></td>
               </tr>
             </tbody>
-
+          </> )})}
       </table>
       </div>
-      </>
-      return(
-        <>
-        {brands.map((brand) => (
+        {brands.map((brand) => {
           return(
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
               <div className="bg-white space-y-3 p-4 rounded-lg shadow">
@@ -121,28 +119,12 @@ const App = () => {
               </div>
             </div>
           )
-        ))}
-      </>
-      )
-    </div>
+        })}
     <div className="content-center w-96 p-8 border-solid border-2 border-black text-sm">
         <h5 className="pb-8 font-semibold">Add Product:</h5>
         <Add handleCreate={handleCreate}/>
     </div>
-  )
-}
-)
-})}
+    </div>
+</>
+)}
 export default App
-
-// <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-//   <div class="bg-white space-y-3 p-4 rounded-lg shadow">
-//     <div class="flex items-center space-x-2 text-sm">
-//       <div>{brand.name}</div>
-//       <div>{brand.product}</div>
-//       <div>{brand.warehouse}</div>
-//       <div className={(brand.status === 'available') ? 'bg-green-500 opacity-75 overflow-auto rounded-lg shadow' : 'bg-red-600 opacity-75 overflow-auto rounded-lg shadow'}>{brand.status}</div>
-//       <div className="text-sm font-medium text-black">{brand.quantity}</div>
-//     </div>
-//   </div>
-// </div>
