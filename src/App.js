@@ -63,7 +63,7 @@ const App = () => {
         </div>
       <div className="text-center pb-16">
         <p className="productSearch pb-2">Search for your product by Supplier</p>
-        <input className="italic" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
+        <input className="" type="text" placeholder="Search" onChange={event => {setSearch(event.target.value)}}/>
       </div>
       <div className="p-8">
       <table className="w-full hidden md:block">
@@ -105,6 +105,15 @@ const App = () => {
           </> )})}
       </table>
       </div>
+      <thead>
+        <tr className="bg-gray-50 border-b-2 border-gray-200 md:hidden">
+          <th className="p-3 text-sm font-semibold tracking-wide text-left">Supplier</th>
+          <th className="p-3 text-sm font-semibold tracking-wide text-left">Product</th>
+          <th className="p-3 text-sm font-semibold tracking-wide text-left">Warehouse</th>
+          <th className="p-3 text-sm font-semibold tracking-wide text-left">Status</th>
+          <th className="p-3 text-sm font-semibold tracking-wide text-left">Quantity</th>
+        </tr>
+      </thead>
         {brands.map((brand) => {
           return(
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
