@@ -3,7 +3,13 @@ import axios from 'axios'
 import Navbar from './components/Navbar.js'
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
-
+import Order from './components/Orders.js'
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+} from 'react-router-dom';
 // localhost
 // http://localhost:8000/api/brands
 const App = () => {
@@ -47,6 +53,9 @@ const App = () => {
 
   return (
     <>
+    <Routes>
+    <Route exact path="/Orders" element={<Order/>}></Route>
+    </Routes>
     <div className="">
       <Navbar/>
       <div className="max-w-lg mx-auto p-8">
