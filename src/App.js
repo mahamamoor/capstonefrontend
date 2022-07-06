@@ -1,12 +1,22 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Navbar from './components/Navbar.js'
 import Add from './components/Add.js'
 import Edit from './components/Edit.js'
-
+import Order from './components/Orders.js'
+import Home from './components/Home.js'
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+} from 'react-router-dom';
 // localhost
 // http://localhost:8000/api/brands
 const App = () => {
   const [brands, setBrands] = useState([])
+  const [search, setSearch] = useState("")
+  const [noSearch, setNoSearch] = useState("No item on this list matches the product")
 
   const getBrands = () => {
     axios.get('https://capstone-warehouse-inventory.herokuapp.com/api/brands')
@@ -37,33 +47,20 @@ const App = () => {
       setBrands(brands.filter(brand => brand.id !== deletedBrand.id))
     })
 }
+
   useEffect(() => {
     getBrands()
   }, [])
 
   return (
     <>
-      <Add handleCreate={handleCreate}/>
-      <div className='brands'>
-      <h1>Inventory App</h1>
-      {brands.map((brand) => {
-        return(
-          <div className='brand' key={brand.id}>
-            <h5>Name: {brand.name}</h5>
-            <h5>Product: {brand.product}</h5>
-            <h5>Warehouse: {brand.warehouse}</h5>
-            <h5>Status: {brand.status}</h5>
-            <h5>Quantity: {brand.quantity}</h5>
-            <Edit handleUpdate={handleUpdate} brand={brand}/>
-            <button onClick={(event) => {handleDelete(event, brand)}} value={brand.id}>
-            X
-            </button>
-          </div>
-        )
-      })}
-      </div>
-    </>
-  )
-}
-
+    <div className="">
+      <Navbar/>
+      <Routes>
+      <Route exact path="/Orders" element={<Order/>}></Route>
+      <Route exact path="/" element={<Home search={search} setSearch={setSearch} brands={brands} setNoSearch={setNoSearch} handleUpdate={handleUpdate} handleDelete={handleDelete} handleCreate={handleCreate}/>}></Route>
+      </Routes>
+    </div>
+</>
+)}
 export default App
